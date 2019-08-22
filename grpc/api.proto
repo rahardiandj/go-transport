@@ -1,0 +1,32 @@
+syntax = "proto3";
+package api;
+
+import "google/protobuf/empty.proto";
+
+message CheckMessage {
+    string check = 1;
+}
+
+message Void {
+
+}
+
+service Check {
+    rpc Ping(Void) returns (CheckMessage) {}
+}
+
+enum Role {
+    GUEST = 0;
+    MEMBER = 1;
+}
+
+message User {
+    uint32 id = 1;
+    Role role = 2;
+}
+
+service UserService {
+    rpc AddUser(User) returns (google.protobuf.Empty){}
+
+    rpc ListUsers(google.protobuf.Empty) returns (stream User){}
+}
