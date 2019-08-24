@@ -11,9 +11,9 @@ import (
 )
 
 func main() {
-	int port = 8889
+	port := 8889
 
-	list, err := net.Listen("tcp", fmt.Sprintf(":%d", 8889))
+	list, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
@@ -25,10 +25,10 @@ func main() {
 
 	api.RegisterCheckServer(grpcServer, &serv)
 
+	log.Printf("Staring grpc server with port: %d ....", port)
+
 	if err := grpcServer.Serve(list); err != nil {
 		log.Fatalf("failed to start grpc server : %v", err)
 	}
-
-	log.Printf("")
 
 }
