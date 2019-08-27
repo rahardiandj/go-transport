@@ -1,15 +1,20 @@
 package gql
 
 import (
+	"fmt"
+
 	"github.com/graphql-go/graphql"
-	"github.com/rahardiandj/go-transport/graphql/postgres"
 )
 
-type Root struct {
-	Query *graphql.Object
-}
+func ExecuteQuery(query string, schema graphql.Schema) *graphql.Result {
+	result := graphql.Do(graphql.Params{
+		Schema:        schema,
+		RequestString: query,
+	})
 
-func NewRoot(db *postgres.Db) *Root {
+	if len(result.Errors) > 0 {
+		fmt.Printf("Unexpected errors inside ExecutedQuery : %v", result.Errors)
+	}
 
-	resolver := Resolver{}
+	return result
 }

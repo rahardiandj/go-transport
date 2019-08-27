@@ -15,6 +15,7 @@ func (r *Resolver) UserResolver(p graphql.ResolveParams) (interface{}, error) {
 
 	if ok {
 		users := r.db.GetUsersByName(name)
+		return users, nil
 	}
 
 	return nil, nil
