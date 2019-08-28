@@ -29,7 +29,7 @@ func initializeAPI() (*chi.Mux, *postgres.Db) {
 	router := chi.NewRouter()
 
 	db, err := postgres.New(
-		postgres.ConnString("localhost", 5432, "postgres", "admin", "go_graphql_db"),
+		postgres.ConnString("localhost", 5432, "postgres", "postgres", "go_graphql_db"),
 	)
 
 	if err != nil {
@@ -43,7 +43,7 @@ func initializeAPI() (*chi.Mux, *postgres.Db) {
 	)
 
 	if err != nil {
-		fmt.Println("error creating schema: %v ", err)
+		fmt.Printf("error creating schema: %v\n", err)
 	}
 
 	s := server.Server{

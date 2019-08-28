@@ -3,6 +3,8 @@ package postgres
 import (
 	"database/sql"
 	"fmt"
+
+	_ "github.com/lib/pq"
 )
 
 type Db struct {
@@ -28,11 +30,8 @@ func New(connString string) (*Db, error) {
 }
 
 func ConnString(host string, port int, user string, password string, dbName string) string {
-	return fmt.Sprintf(
-		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbName,
-	)
-
+	return fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+		host, port, user, password, dbName)
 }
 
 type User struct {

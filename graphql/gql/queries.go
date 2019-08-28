@@ -11,7 +11,7 @@ type Root struct {
 
 func NewRoot(db *postgres.Db) *Root {
 
-	resolver := Resolver{}
+	resolver := Resolver{db: db}
 
 	root := Root{
 		Query: graphql.NewObject(
